@@ -3,19 +3,23 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'inicio',
         pathMatch: 'full'
+    },
+    {
+        path: 'inicio',
+        loadComponent: () => import('../app/pages/home/home.component').then(m => m.HomeComponent)
     },
     {
         path: 'login',
         loadComponent: () => import('../app/pages/login/login.component').then(m => m.LoginComponent)
     },
     {
-        path: 'register',
-        loadComponent: () => import('../app/pages/register/register.component').then(m => m.RegisterComponent)
+        path: 'dashboard',
+        loadComponent: () => import('../app/pages/dashboard/dashboard.component').then(m => m.DashboardComponent)
     },
     {
         path: '**',
-        loadComponent: () => import('../app/pages/not-found/not-found.component').then(m => m.NotFoundComponent)
+        redirectTo: 'inicio'
     }
 ];

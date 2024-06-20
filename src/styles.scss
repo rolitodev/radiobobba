@@ -1,0 +1,37 @@
+@use '@ngxpert/hot-toast/src/styles/styles.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-color: black;
+}
+
+body,
+html,
+.font-sans,
+.mat-bottom-sheet-container {
+  font-family: "Pixelify Sans", sans-serif !important;
+}
+
+.mdc-slider__input {
+  padding: 0px !important;
+}
+
+.mat-mdc-slider .mdc-slider__thumb-knob {
+  background-color: #FF4438 !important;
+  border-color: #FF4438 !important;
+}
+
+.mat-mdc-slider .mdc-slider__track--active_fill {
+  border-color: #FF4438 !important;
+}
+
+.mat-bottom-sheet-container {
+  overflow-x: hidden !important;
+}

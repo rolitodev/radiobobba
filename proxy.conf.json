@@ -1,0 +1,10 @@
+{
+    "/user-data": {
+        "target": "https://api.myip.com",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/user-data": ""
+        }
+    }
+}

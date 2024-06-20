@@ -1,0 +1,22 @@
+.container-home {
+  background-image: url('/assets/background.png');
+  background-color: black;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+swiper-container {
+  width: 600px;
+  height: 320px;
+}
+
+swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
