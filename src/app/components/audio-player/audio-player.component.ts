@@ -7,7 +7,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { RadioService } from '../../services/radio.service';
 import { ModalFormPetitionComponent } from '../modals/modal-form-petition/modal-form-petition.component';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, interval, switchMap } from 'rxjs';
 import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
@@ -26,9 +26,15 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
 
   public volume: number = 0.5; // Valor inicial del volumen (50%)
 
-  public urlHabboDJ: string = 'https://www.habbo.com/habbo-imaging/avatarimage?figure=hr-3791-1398-61.hd-4383-7-61.ch-215-1408-61.lg-3787-110-61.sh-4159-110-61.he-1604-95-61.ea-3169-110-61.ca-4173-61-61.cc-4952-110-61&gender=M&direction=2&head_direction=2&action=,crr=0&gesture=nrm&size=l';
+  public habboData: any = {
+    image: 'https://www.habbo.com/habbo-imaging/avatarimage?figure=hr-3791-1398-61.hd-4383-7-61.ch-215-1408-61.lg-3787-110-61.sh-4159-110-61.he-1604-95-61.ea-3169-110-61.ca-4173-61-61.cc-4952-110-61&gender=M&direction=2&head_direction=2&action=,crr=0&gesture=nrm&size=l',
+    name: 'AutoDJ'
+  };
+
+  public radioInfo: any = {};
 
   public items$!: Observable<any[]>;
+  private subscription!: Subscription;
 
   constructor(
     private _cdr: ChangeDetectorRef, private _bottomSheet: MatBottomSheet, private _radio: RadioService,
@@ -38,19 +44,44 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
   // Obtener los datos de la radio
   ngOnInit(): void {
 
+    // Crea un intervalo que emite cada 60,000 milisegundos (1 minuto)
+    this.subscription = interval(60000).pipe(
+      // Usamos switchMap para cancelar la solicitud anterior si una nueva emisión ocurre
+      switchMap(() => this._radio.getDataRadio())
+    ).subscribe({
+      next: (response: any) => {
+        this.radioInfo = response;
+      },
+      error: (err) => {
+        throw err;
+      }
+    });
+
+    // Realiza la primera llamada inmediatamente
+    this._radio.getDataRadio().subscribe({
+      next: async (response: any) => {
+        this.radioInfo = response;
+      },
+      error: (err) => {
+        throw err;
+      }
+    });
+
     this.items$ = this.firestoreService.getCollection('radio_info');
 
     this.items$.subscribe((items: any) => {
-
+      
       if (items[0].dj.toString().toLowerCase() === 'autodj') {
-        this.urlHabboDJ = 'https://www.habbo.com/habbo-imaging/avatarimage?figure=hr-3791-1398-61.hd-4383-7-61.ch-215-1408-61.lg-3787-110-61.sh-4159-110-61.he-1604-95-61.ea-3169-110-61.ca-4173-61-61.cc-4952-110-61&gender=M&direction=2&head_direction=2&action=,crr=0&gesture=nrm&size=l';
+        this.habboData.image = 'https://www.habbo.com/habbo-imaging/avatarimage?figure=hr-3791-1398-61.hd-4383-7-61.ch-215-1408-61.lg-3787-110-61.sh-4159-110-61.he-1604-95-61.ea-3169-110-61.ca-4173-61-61.cc-4952-110-61&gender=M&direction=2&head_direction=2&action=,crr=0&gesture=nrm&size=l';
         return;
       }
+
+      this.habboData.name = items[0].dj;
 
       this._radio.getHabboInfo(items[0].dj).subscribe({
         next: async (response: any) => {
           if (typeof response === 'object' && response !== null) {
-            this.urlHabboDJ = `https://www.habbo.com/habbo-imaging/avatarimage?figure=${response.figureString}&gender=M&direction=2&head_direction=2&action=wav,crr=667&gesture=sml&size=l`;
+            this.habboData.image = `https://www.habbo.com/habbo-imaging/avatarimage?figure=${response.figureString}&gender=M&direction=2&head_direction=2&action=wav,crr=667&gesture=sml&size=l`;
           }
         }
       });
@@ -135,6 +166,13 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
   // Funcion para abrir el formulario de radio
   openFormRadio(): void {
     this._bottomSheet.open(ModalFormPetitionComponent);
+  }
+
+  ngOnDestroy() {
+    // Asegúrate de desuscribirte cuando el componente se destruya para evitar fugas de memoria
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

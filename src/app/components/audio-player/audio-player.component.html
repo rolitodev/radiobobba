@@ -5,18 +5,18 @@
         <div class="flex w-1/3 dj-container">
 
             <div class="overflow-hidden w-24 h-24 gradient-item z-1" style="background-color: #FF4438;">
-                <img class="object-cover w-full h-full zoom-hover habbo-image z-2" [src]="urlHabboDJ"
+                <img class="object-cover w-full h-full zoom-hover habbo-image z-2" [src]="habboData.image"
                     alt="Habbo imagen">
             </div>
 
-            <ul class="pl-4" *ngFor="let item of items$ | async; let i = index">
+            <ul class="pl-4">
                 <li><span class="on-live">En Directo</span></li>
                 <li class="text-white">
-                    <a href="https://www.habbo.es/profile/{{item.dj}}" target="_blank">
-                        {{ item.dj }}
+                    <a href="https://www.habbo.es/profile/{{habboData.name}}" target="_blank">
+                        {{ habboData.name }}
                     </a>
                 </li>
-                <li class="text-white">Oyentes: {{ item.listeners }}</li>
+                <li class="text-white">Oyentes: {{ radioInfo.listeners }}</li>
             </ul>
 
         </div>
@@ -92,3 +92,6 @@
 </div>
 
 <audio #audioPlayer src="https://sonic.streamingchilenos.com/8074/stream" autoplay></audio>
+
+
+<!-- https://www.habbo.com/habbo-imaging/avatarimage?figure=hr-500-54-61.hd-600-1-.ch-3979-68-61.lg-716-66-62-.sh-735-68-.he-3295-92-92&gender=F&direction=7&head_direction=7&action=gesture=nrm&&size=l -->

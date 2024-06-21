@@ -13,7 +13,7 @@ export class RadioService {
 
   // Método para obtener los datos de la radio.
   getDataRadio(): Observable<any> {
-    return this.http.get<any[]>(`https://radiobobba.alwaysdata.net/api/external/streaming`).pipe(
+    return this.http.get<any[]>(`https://sonic.streamingchilenos.com/cp/get_info.php?p=8074`).pipe(
       catchError(() => {
         return throwError(() => new Error('Error en la solicitud de datos de la radio'));
       })
