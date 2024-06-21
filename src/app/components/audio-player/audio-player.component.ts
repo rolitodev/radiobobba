@@ -44,8 +44,8 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
   // Obtener los datos de la radio
   ngOnInit(): void {
 
-    // Crea un intervalo que emite cada 60,000 milisegundos (1 minuto)
-    this.subscription = interval(60000).pipe(
+    // Crea un intervalo que emite cada 40,000 milisegundos (40 segundos)
+    this.subscription = interval(20000).pipe(
       // Usamos switchMap para cancelar la solicitud anterior si una nueva emisión ocurre
       switchMap(() => this._radio.getDataRadio())
     ).subscribe({
@@ -161,6 +161,11 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
 
   convertPercentage(number: number) {
     return parseFloat(number.toFixed(2));
+  }
+
+  convertString(songString: string) {
+    let cleanedString = songString.replace(/^\d+\.\)\s*|<br>/g, '');
+    return cleanedString;
   }
 
   // Funcion para abrir el formulario de radio
