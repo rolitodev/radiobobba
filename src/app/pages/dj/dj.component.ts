@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, Subscription, forkJoin, interval, switchMap } from 'rxjs';
+import { Observable, Subscription, catchError, forkJoin, interval, switchMap } from 'rxjs';
 import { RadioService } from '../../services/radio.service';
 import { FirestoreService } from '../../services/firestore.service';
 
@@ -75,16 +75,22 @@ export class DjComponent implements OnInit {
     });
 
   }
-
   fetchImagesForItems(items: any[]): Observable<any[]> {
     const observables = items.map(item => {
       return this._radio.getHabboInfo(item.habbo).pipe(
-        switchMap((items: any) => {
-          item.habboImage = `https://www.habbo.com/habbo-imaging/avatarimage?figure=${items.figureString}&gender=M&direction=2&head_direction=2&action=&gesture=nrm&headonly=1`
+        switchMap((habboInfo: any) => {
+          // Construir la URL de la imagen usando la información de Habbo
+          item.habboImage = `https://www.habbo.com/habbo-imaging/avatarimage?figure=${habboInfo.figureString}&gender=M&direction=2&head_direction=2&action=&gesture=nrm&headonly=1`;
           return [item]; // Retorna el item actualizado como un array observable
+        }),
+        catchError(() => {
+          // Manejo de errores: asignar una imagen por defecto
+          item.habboImage = 'https://www.habbo.com/habbo-imaging/avatarimage?figure=hr-3163-61-.hd-190-10-.ch-3030-110-.lg-5594-110-.sh-3524-110-1408-.ha-5004-61-61.he-3660-64-76-.fa-3993-110-.cc-886-110-&gender=M&direction=2&head_direction=2&action=&gesture=nrm&headonly=1'; // URL de la imagen por defecto
+          return [item]; // Retorna el item con la imagen por defecto
         })
       );
     });
+
     return forkJoin(observables); // Combina todos los observables en uno solo
   }
 
@@ -103,6 +109,10 @@ export class DjComponent implements OnInit {
   changeValuePetitions(): void {
     this.petitionsStatus = !this.petitionsStatus;
     this.firestoreService.updateDocument('peticiones_status', 'vTtNi5FOOXVCRru7krDe', { status: this.petitionsStatus })
+  }
+
+  deletePetition(id: string): void {
+    this.firestoreService.deleteDocument('peticiones', id);
   }
 
 }

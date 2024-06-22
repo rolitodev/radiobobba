@@ -56,15 +56,15 @@ export class ModalLoginComponent implements OnInit {
 
   }
 
-  // register(): void {
-  //   this._auth.register({ name: 'Hecky', password: 'Millos24', email: 'hectorgarzon2420@gmail.com' }).subscribe(
-  //     (data: any) => {
-  //       console.log('data', data);
-  //     },
-  //     (error: any) => {
-  //       console.log('error', error);
-  //     }
-  //   );
-  // }
+  register(): void {
+    this._auth.register({ name: 'Harry.Plones', password: 'Blurryface27', rank: 1, email: 'Harry.Plones', description: 'Solo es un Ingeniero de Sonido roleando como comunicador y dizque "DJ", Lisztomaníaco (adícto a escuchar música), y hablar de ella, chismoso de profesión, siempre morboso nunca inmorboso, y alcohólico de closet.' }).subscribe(
+      (data: any) => {
+        console.log('data', data);
+      },
+      (error: any) => {
+        console.log('error', error);
+      }
+    );
+  }
 
 }

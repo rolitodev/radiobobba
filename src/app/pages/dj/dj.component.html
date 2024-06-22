@@ -1,15 +1,15 @@
 <div class="container px-6 mx-auto grid">
 
-    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+    <h2 class="my-6 text-2xl font-semibold text-gray-200">
         Panel DJ - Dashboard
     </h2>
 
     <!-- Cards -->
     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
         <!-- Card -->
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="flex items-center p-4 rounded-lg shadow-xs bg-gray-800">
 
-            <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
+            <div class="p-3 mr-4 rounded-full text-orange-100 bg-orange-500">
                 <svg class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M19 4H5v2H3v14h7v-8H5V6h14v6h-5v8h7V6h-2V4zm-3 10h3v4h-3v-4zm-8 0v4H5v-4h3z"
                         fill="currentColor" />
@@ -19,14 +19,14 @@
                 <p class="mb-2 text-sm font-medium text-white">
                     Oyentes
                 </p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200" style="font-family: ui-monospace;">
+                <p class="text-lg font-semibold text-gray-200" style="font-family: ui-monospace;">
                     {{ radioInfo.listeners || 0 }}
                 </p>
             </div>
         </div>
         <!-- Card -->
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+        <div class="flex items-center p-4 rounded-lg shadow-xs bg-gray-800">
+            <div class="p-3 mr-4 rounded-full text-green-100 bg-green-500">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M16 4h6v16h-6V4ZM2 14h6v6H2v-6Zm13-4H9v10h6V10Z" />
                 </svg>
@@ -35,14 +35,14 @@
                 <p class="mb-2 text-sm font-medium text-white">
                     Bitrate
                 </p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200" style="font-family: ui-monospace;">
+                <p class="text-lg font-semibold text-gray-200" style="font-family: ui-monospace;">
                     {{ radioInfo.bitrate || 0 }}
                 </p>
             </div>
         </div>
         <!-- Card -->
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
+        <div class="flex items-center p-4 rounded-lg shadow-xs bg-gray-800">
+            <div class="p-3 mr-4 rounded-full text-teal-100 bg-teal-500">
 
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                     <path
@@ -59,13 +59,13 @@
                     matTooltip="Al activar el botón, los usuarios verán que estás en línea.">
                     <input type="checkbox" class="sr-only peer" [value]="imActive" (change)="changeStatusImActive()">
                     <div
-                        class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                        class="relative w-11 h-6 rounded-full peer bg-gray-700 peer-focus:ring-4peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                     </div>
                 </label>
             </div>
         </div>
         <!-- Card -->
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="flex items-center p-4 rounded-lg shadow-xs bg-gray-800">
             <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
                 <svg class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M4 2h18v16H6v2H4v-2h2v-2h14V4H4v18H2V2h2zm5 7H7v2h2V9zm2 0h2v2h-2V9zm6 0h-2v2h2V9z"
@@ -98,7 +98,7 @@
 
                 <thead>
                     <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        class="text-xs font-semibold tracking-wide text-left uppercase border-b border-gray-700text-gray-400 bg-gray-800">
                         <th class="px-4 py-3 text-white">Habbo</th>
                         <th class="px-4 py-3 text-white">Petición</th>
                         <th class="px-4 py-3 text-white">Fecha</th>
@@ -106,9 +106,9 @@
                     </tr>
                 </thead>
 
-                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                <tbody class="divide-y divide-gray-700 bg-gray-800">
 
-                    <tr class="text-gray-700 dark:text-gray-400" *ngFor="let item of items$ | async">
+                    <tr class="text-gray-400" *ngFor="let item of items$ | async">
                         <td class="px-4 py-3">
                             <div class="flex items-center text-sm">
                                 <div class="relative hidden w-14 h-14 mr-3 rounded-full md:block">
@@ -119,7 +119,7 @@
                                 </div>
                                 <div>
                                     <p class="font-semibold text-white">{{ item.habbo}}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">
+                                    <p class="text-xs  text-gray-400">
                                         {{ item.country }}
                                         {{ item.ip }}
                                     </p>
@@ -134,7 +134,7 @@
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
-                                <button matTooltip="Borrar la petición de {{ item.habbo }}"
+                                <button matTooltip="Borrar la petición de {{ item.habbo }}" (click)="deletePetition(item.id)"
                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 rounded-lg"
                                     aria-label="Delete">
 
