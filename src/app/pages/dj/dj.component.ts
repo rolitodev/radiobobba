@@ -62,7 +62,7 @@ export class DjComponent implements OnInit {
     this.itemsStatus$ = this.firestoreService.getCollection('peticiones_status');
     this.itemsRadioInfo$ = this.firestoreService.getCollection('radio_info');
 
-    this.items$ = this.firestoreService.getCollection('peticiones').pipe(
+    this.items$ = this.firestoreService.getCollectionv2('peticiones').pipe(
       switchMap(items => this.fetchImagesForItems(items))
     );
 

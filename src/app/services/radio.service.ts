@@ -40,7 +40,7 @@ export class RadioService {
   }
 
   getIp(): Observable<any> {
-    return this.http.get<any>(`/user-data`).pipe(
+    return this.http.get<any>(`https://api.country.is/`).pipe(
       catchError(() => {
         return throwError(() => new Error('Error en la solicitud de la IP'));
       })

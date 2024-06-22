@@ -17,7 +17,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-white">
-                    Oyentes
+                    Oyentes <a href="https://sonic.streamingchilenos.com/8074/stream" target="_blank">(Link Radio)</a>
                 </p>
                 <p class="text-lg font-semibold text-gray-200" style="font-family: ui-monospace;">
                     {{ radioInfo.listeners || 0 }}
@@ -57,7 +57,7 @@
 
                 <label class="inline-flex items-center me-5 cursor-pointer"
                     matTooltip="Al activar el botón, los usuarios verán que estás en línea.">
-                    <input type="checkbox" class="sr-only peer" [value]="imActive" (change)="changeStatusImActive()">
+                    <input type="checkbox" class="sr-only peer" [checked]="imActive" (change)="changeStatusImActive()">
                     <div
                         class="relative w-11 h-6 rounded-full peer bg-gray-700 peer-focus:ring-4peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                     </div>
@@ -78,7 +78,7 @@
                 </p>
                 <label class="inline-flex items-center me-5 cursor-pointer"
                     matTooltip="Cuando activas el botón, se habilitará el formulario para que los oyentes te pidan canciones.">
-                    <input type="checkbox" class="sr-only peer" [value]="petitionsStatus"
+                    <input type="checkbox" class="sr-only peer" [checked]="petitionsStatus"
                         (change)="changeValuePetitions()">
                     <div
                         class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
@@ -118,10 +118,14 @@
                                     </a>
                                 </div>
                                 <div>
-                                    <p class="font-semibold text-white">{{ item.habbo}}</p>
-                                    <p class="text-xs  text-gray-400">
-                                        {{ item.country }}
-                                        {{ item.ip }}
+                                    <p class="font-semibold text-white flex">
+                                        {{ item.habbo }}
+                                        <img class="ml-2 object-contain"
+                                            src="https://flagsapi.com/{{item.country}}/flat/16.png" alt=""
+                                            title="{{item.country}}" draggable="false">
+                                    </p>
+                                    <p class="text-xs text-gray-400">
+                                        IP: {{ item.ip }}
                                     </p>
                                 </div>
                             </div>
@@ -134,7 +138,8 @@
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
-                                <button matTooltip="Borrar la petición de {{ item.habbo }}" (click)="deletePetition(item.id)"
+                                <button matTooltip="Borrar la petición de {{ item.habbo }}"
+                                    (click)="deletePetition(item.id)"
                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 rounded-lg"
                                     aria-label="Delete">
 

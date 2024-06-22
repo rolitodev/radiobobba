@@ -21,6 +21,16 @@ export class FirestoreService {
     );
   }
 
+  getCollectionv2(collectionName: string): Observable<any[]> {
+    return this.firestore.collection(collectionName, ref => ref.orderBy('date', 'desc')).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any; // Obteniendo los datos del documento
+        const id = a.payload.doc.id; // Obteniendo el ID del documento
+        return { id, ...data }; // Combinando el ID con los datos del documento
+      }))
+    );
+  }
+
   // Obtener un documento por ID
   getDocument(collectionName: string, docId: string): Observable<any> {
     return this.firestore.collection(collectionName).doc(docId).valueChanges();
