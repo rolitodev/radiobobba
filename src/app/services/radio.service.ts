@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -8,6 +8,8 @@ import { catchError } from 'rxjs/operators';
 })
 
 export class RadioService {
+
+  @Output() public showRadio: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +37,10 @@ export class RadioService {
         return throwError(() => new Error('Error en la solicitud de la IP'));
       })
     );
+  }
+
+  changeStatusShowRadio(status: boolean): void {
+    this.showRadio.emit(status);
   }
 
 }

@@ -34,4 +34,26 @@ html,
 
 .mat-bottom-sheet-container {
   overflow-x: hidden !important;
+  background-color: #1f2937 !important;
+}
+
+.container-home {
+  background-image: url('/assets/background.png');
+  background-color: black;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(77, 77, 77);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF4438;
 }

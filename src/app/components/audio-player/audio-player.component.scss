@@ -3,6 +3,7 @@
   bottom: 0;
   width: 100%;
   border-top: 4px solid red;
+  background-color: rgb(31 41 55 / 90%);
 }
 
 .zoom-hover {
@@ -15,17 +16,7 @@
 
 .habbo-image {
   filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.7));
-}
-
-.gradient-item::before {
-  box-shadow: inset 0px -9px 10px 0px #FF4438;
-  content: "";
-  height: 96px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 97px;
-  z-index: 1;
+  mask-image: linear-gradient(to bottom, #ff3a24 80%, transparent 100%);
 }
 
 .on-live {

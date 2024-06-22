@@ -1,8 +1,9 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { RadioService } from '../../services/radio.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  constructor(private _radio: RadioService) { }
+
+  ngOnInit(): void {
+    this._radio.changeStatusShowRadio(true);
+  }
 
 }
