@@ -75,14 +75,12 @@
 
                         <div class="flex justify-center text-center items-center mb-2">
 
-                            <img src="https://www.habbo.com/habbo-imaging/avatarimage?figure=hr-3163-61-.hd-190-10-.ch-3030-110-.lg-5594-110-.sh-3524-110-1408-.he-3660-64-76-.fa-3993-110-.cc-886-110-&gender=M&direction=2&head_direction=2&action=&gesture=sml&size=m"
-                                alt="">
-
                             <div class="block">
-                                <a href="#" class="block px-4 py-2 text-sm text-white" role="menuitem" tabindex="-1"
-                                    id="user-menu-item-0">Mi Perfil</a>
-                                <a (click)="closeSession()" class="block px-4 py-2 text-sm text-white" role="menuitem" tabindex="-1"
-                                    id="user-menu-item-2">Salir</a>
+                                <a class="block px-4 py-2 text-sm text-white cursor-pointer" role="menuitem"
+                                    tabindex="-1" id="user-menu-item-0" (click)="toggleUserMenu()">Mi Perfil</a>
+                                <a (click)="closeSession(); toggleUserMenu()"
+                                    class="block px-4 py-2 text-sm text-white cursor-pointer" role="menuitem"
+                                    tabindex="-1" id="user-menu-item-2">Salir</a>
                             </div>
 
                         </div>

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 
 export class AuthService {
 
-  public isAuth: boolean = false;
+  public isAuth: boolean = localStorage.getItem('user') ? true : false;
 
   constructor(public http: HttpClient) { }
 

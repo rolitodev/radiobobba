@@ -31,6 +31,10 @@ export class NavbarComponent {
 
   constructor(private _bottomSheet: MatBottomSheet, private _title: Title, public router: Router, public _auth: AuthService) { }
 
+  ngOninit(): void {
+    this.toggleUserMenu();
+  }
+
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
@@ -41,15 +45,24 @@ export class NavbarComponent {
 
   callAction(item: string) {
     this._title.setTitle('Radio Bobba: Iniciar Sesión Panel DJ');
+
     if (item.toString().toLocaleLowerCase() === 'panel dj') {
+
+      if (localStorage.getItem('user')) {
+        this.router.navigate(['/dj']);
+        return;
+      }
+
       this._bottomSheet.open(ModalLoginComponent).afterDismissed().subscribe(() => {
         this._title.setTitle('Radio Bobba: Música en Vivo y Diversión en Habbo Hotel');
       });
+
     }
+
   }
 
   closeSession(): void {
-    localStorage.clear();
+    localStorage.removeItem('user');
     this._auth.changeStatusAuth(false);
     this.router.navigate(['/inicio']);
   }

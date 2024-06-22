@@ -28,7 +28,6 @@ export class AppComponent {
 
 }
 
-
 /**
  * rango 0 -> usuario
 rango 1 -> dj

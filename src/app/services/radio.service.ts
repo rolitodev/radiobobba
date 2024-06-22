@@ -31,6 +31,14 @@ export class RadioService {
     );
   }
 
+  getTeamActive(): Observable<any> {
+    return this.http.get<any>(`https://backend-radiobobba.onrender.com/users/equipo`).pipe(
+      catchError(() => {
+        return throwError(() => new Error('Error en la solicitud de información del equipo activo'));
+      })
+    );
+  }
+
   getIp(): Observable<any> {
     return this.http.get<any>(`/user-data`).pipe(
       catchError(() => {
