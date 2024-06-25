@@ -48,7 +48,7 @@ export class RadioService {
   }
 
   insertRoom(active: boolean, idRoom: number): Observable<any> {
-    return this.http.post<any>(`https://radiobobbaapi.alwaysdata.net/api/crudRooms.php`, { active, idRoom }).pipe(
+    return this.http.post<any>(`https://radiobobbaapi.alwaysdata.net/api/insertRoom.php`, { active, idRoom }).pipe(
       catchError(() => {
         return throwError(() => new Error('Error en la solicitud de la inserción de la sala'));
       })

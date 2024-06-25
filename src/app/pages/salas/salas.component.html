@@ -11,7 +11,7 @@
                     <div class="overflow-hidden z-0 w-full rounded-t-lg" style="background-color: #FF4438;">
                         <a href="https://www.habbo.es/room/{{room.externalData.id}}" target="_blank">
                             <img class="object-cover image-room w-full habbo-image z-0"
-                                [src]="room.externalData.thumbnailUrl" draggable="false">
+                                [src]="room.externalData.thumbnailUrl" draggable="false" (error)="imageError($event)">
                         </a>
                     </div>
 

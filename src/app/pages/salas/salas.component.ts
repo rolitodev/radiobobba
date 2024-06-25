@@ -34,4 +34,8 @@ export class SalasComponent implements OnInit {
 
   }
 
+  imageError(event:any ): void {
+    event.target.src = '/assets/not-found.webp';
+  }
+
 }
