@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { AuthService } from '../../../services/auth.service';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { Router } from '@angular/router';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatDialogModule],
   templateUrl: './modal-login.component.html',
   styleUrl: './modal-login.component.scss'
 })
@@ -19,7 +20,10 @@ export class ModalLoginComponent implements OnInit {
 
   public isLoading: boolean = false;
 
-  constructor(public _fb: FormBuilder, private _auth: AuthService, public toast: HotToastService, public _route: Router) { }
+  constructor(
+    public _fb: FormBuilder, private _auth: AuthService, public toast: HotToastService, public _route: Router,
+    public dialogRef: MatDialogRef<ModalLoginComponent>
+  ) { }
 
   ngOnInit(): void {
     this.formLogin = this._fb.group({
@@ -44,6 +48,7 @@ export class ModalLoginComponent implements OnInit {
           this.isLoading = false;
           this.toast.success("Has iniciado sesión correctamente. 🚀");
           this._route.navigate(['/dj']);
+          this.closeDialog();
         },
         error: (error) => {
           this.isLoading = false;
@@ -56,15 +61,19 @@ export class ModalLoginComponent implements OnInit {
 
   }
 
-  register(): void {
-    this._auth.register({ name: 'Harry.Plones', password: 'Blurryface27', rank: 1, email: 'Harry.Plones', description: 'Solo es un Ingeniero de Sonido roleando como comunicador y dizque "DJ", Lisztomaníaco (adícto a escuchar música), y hablar de ella, chismoso de profesión, siempre morboso nunca inmorboso, y alcohólico de closet.' }).subscribe(
-      (data: any) => {
-        console.log('data', data);
-      },
-      (error: any) => {
-        console.log('error', error);
-      }
-    );
+  // register(): void {
+  //   this._auth.register({ name: 'Harry.Plones', password: 'Blurryface27', rank: 1, email: 'Harry.Plones', description: 'Solo es un Ingeniero de Sonido roleando como comunicador y dizque "DJ", Lisztomaníaco (adícto a escuchar música), y hablar de ella, chismoso de profesión, siempre morboso nunca inmorboso, y alcohólico de closet.' }).subscribe(
+  //     (data: any) => {
+  //       console.log('data', data);
+  //     },
+  //     (error: any) => {
+  //       console.log('error', error);
+  //     }
+  //   );
+  // }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
 }

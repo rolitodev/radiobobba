@@ -32,7 +32,15 @@ export class RadioService {
   }
 
   getTeamActive(): Observable<any> {
-    return this.http.get<any>(`https://backend-radiobobba.onrender.com/users/equipo`).pipe(
+    return this.http.get<any>(`https://radiobobbaapi.alwaysdata.net/api/getUsers.php`).pipe(
+      catchError(() => {
+        return throwError(() => new Error('Error en la solicitud de información del equipo activo'));
+      })
+    );
+  }
+
+  getRooms(): Observable<any> {
+    return this.http.get<any>(`https://radiobobbaapi.alwaysdata.net/api/getRooms.php`).pipe(
       catchError(() => {
         return throwError(() => new Error('Error en la solicitud de información del equipo activo'));
       })

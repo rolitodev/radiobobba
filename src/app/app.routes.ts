@@ -16,8 +16,8 @@ export const routes: Routes = [
         loadComponent: () => import('../app/pages/equipo/equipo.component').then(m => m.EquipoComponent)
     },
     {
-        path: 'alianzas',
-        loadComponent: () => import('../app/pages/alianzas/alianzas.component').then(m => m.AlianzasComponent)
+        path: 'salas',
+        loadComponent: () => import('../app/pages/salas/salas.component').then(m => m.SalasComponent)
     },
     {
         path: 'dj',

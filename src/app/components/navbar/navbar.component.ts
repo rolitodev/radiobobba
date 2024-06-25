@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router, RouterModule } from '@angular/router';
 import { Title } from "@angular/platform-browser";
+import { MatDialog } from '@angular/material/dialog';
 import { ModalLoginComponent } from '../modals/modal-login/modal-login.component';
 import { AuthService } from '../../services/auth.service';
 
@@ -18,7 +18,7 @@ export class NavbarComponent {
 
   public menu: any = [
     { name: 'Equipo', link: '/equipo' },
-    { name: 'Alianzas', link: '/alianzas' },
+    { name: 'Salas', link: '/salas' },
     { name: 'Panel DJ', link: '' }
   ];
 
@@ -29,7 +29,9 @@ export class NavbarComponent {
     image: 'https://www.habbo.com/habbo-imaging/avatarimage?figure=hr-3163-61-.hd-190-10-.ch-3030-110-.lg-5594-110-.sh-3524-110-1408-.ha-5004-61-61.he-3660-64-76-.fa-3993-110-.cc-886-110-&gender=M&direction=2&head_direction=2&action=&gesture=sml&headonly=1'
   }
 
-  constructor(private _bottomSheet: MatBottomSheet, private _title: Title, public router: Router, public _auth: AuthService) { }
+  constructor(private _title: Title, public router: Router, public _auth: AuthService,
+    public dialog: MatDialog
+  ) { }
 
   ngOninit(): void {
     this.toggleUserMenu();
@@ -53,9 +55,7 @@ export class NavbarComponent {
         return;
       }
 
-      this._bottomSheet.open(ModalLoginComponent).afterDismissed().subscribe(() => {
-        this._title.setTitle('Radio Bobba: Música en Vivo y Diversión en Habbo Hotel');
-      });
+      this.dialog.open(ModalLoginComponent);
 
     }
 

@@ -28,11 +28,12 @@ export class EquipoComponent implements OnInit {
     this._radio.getTeamActive().pipe(
       switchMap((items: any[]) => this.fetchImagesForItems(items))
     ).subscribe({
-      next: (data: any[]) => {
+      next: async (data: any[]) => {
         this.team = data;
         this.isLoading = false;
       },
       error: (error: any) => {
+        this.isLoading = false;
         throw error;
       }
     });
@@ -56,10 +57,10 @@ export class EquipoComponent implements OnInit {
       case 1: {
         return 'DJ';
       }
-      case 8: {
+      case 2: {
         return 'Dueño';
       }
-      case 9: {
+      case 3: {
         return 'Programador';
       }
       default: {

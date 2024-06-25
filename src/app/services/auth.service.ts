@@ -13,7 +13,7 @@ export class AuthService {
   constructor(public http: HttpClient) { }
 
   getLogin(data: any): Observable<any> {
-    return this.http.post<any[]>(`https://backend-radiobobba.onrender.com/auth/login`, { ...data }).pipe();
+    return this.http.post<any[]>(`https://radiobobbaapi.alwaysdata.net/api/login.php`, { ...data }).pipe();
   }
 
   register(data: any): Observable<any> {

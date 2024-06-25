@@ -4,6 +4,10 @@
         Panel DJ - Dashboard
     </h2>
 
+    <p class="text-white text-end mb-2" *ngFor="let item of itemsRadioInfo$ | async">
+        DJ Actual: {{ item?.dj || 'N/A' }}
+    </p>
+
     <!-- Cards -->
     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
         <!-- Card -->

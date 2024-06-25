@@ -4,25 +4,27 @@
 
         <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
-            <div class="text-center text-white pt-4 bg-gray-800 rounded-xl" *ngFor="let user of team">
+            <div class="text-center text-white bg-gray-800 rounded-xl" *ngFor="let room of rooms">
 
                 <div class="w-full flex justify-center z-0">
-                    <div class="overflow-hidden w-32 h-32 z-0 rounded-full" style="background-color: #FF4438;">
-                        <a href="https://www.habbo.es/profile/{{user.name}}" target="_blank">
-                            <img class="object-cover w-full h-full zoom-hover habbo-image z-0" [src]="user.habboImage"
-                                alt="{{user.name}} Keko">
+
+                    <div class="overflow-hidden z-0 w-full rounded-t-lg" style="background-color: #FF4438;">
+                        <a href="https://www.habbo.es/room/{{room.externalData.id}}" target="_blank">
+                            <img class="object-cover image-room w-full habbo-image z-0"
+                                [src]="room.externalData.thumbnailUrl" draggable="false">
                         </a>
                     </div>
+
                 </div>
 
                 <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {{ user.name }}
+                    {{ room.externalData.name}}
                 </h3>
 
-                <p>{{ setRoles(user.rank) }}</p>
+                <p>{{ room.externalData.ownerName }}</p>
 
                 <p class="mt-3 mb-4 font-light text-white pl-2 pr-2">
-                    {{ user.description || 'N/A' }}
+                    {{ room.externalData.description }}
                 </p>
 
             </div>
