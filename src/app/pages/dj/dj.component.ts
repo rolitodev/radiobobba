@@ -6,6 +6,9 @@ import { FirestoreService } from '../../services/firestore.service';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalCreateRoomsComponent } from '../../components/modals/modal-create-rooms/modal-create-rooms.component';
+import { ModalRegisterUserComponent } from '../../components/modals/modal-register-user/modal-register-user.component';
 
 @Component({
   selector: 'app-dj',
@@ -28,7 +31,9 @@ export class DjComponent implements OnInit {
   public petitionsStatus: boolean = false;
   public imActive: boolean = false;
 
-  constructor(private _radio: RadioService, private firestoreService: FirestoreService) { }
+  constructor(
+    private _radio: RadioService, public dialog: MatDialog,
+    private firestoreService: FirestoreService) { }
 
   ngOnInit(): void {
 
@@ -94,11 +99,12 @@ export class DjComponent implements OnInit {
     return forkJoin(observables); // Combina todos los observables en uno solo
   }
 
-  ngOnDestroy() {
-    // Asegúrate de desuscribirte cuando el componente se destruya para evitar fugas de memoria
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  openModalCreateRoom(): void {
+    this.dialog.open(ModalCreateRoomsComponent);
+  }
+
+  openModalRegisterUser(): void {
+    this.dialog.open(ModalRegisterUserComponent);
   }
 
   changeStatusImActive(): void {
@@ -113,6 +119,13 @@ export class DjComponent implements OnInit {
 
   deletePetition(id: string): void {
     this.firestoreService.deleteDocument('peticiones', id);
+  }
+
+  ngOnDestroy() {
+    // Asegúrate de desuscribirte cuando el componente se destruya para evitar fugas de memoria
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

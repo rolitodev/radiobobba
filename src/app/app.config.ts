@@ -7,6 +7,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 import { routes } from './app.routes';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
       dismissible: true,
       position: 'bottom-center',
       duration: 5000
-    })
+    }),
+    provideEnvironmentNgxMask()
   ]
 };

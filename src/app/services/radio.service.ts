@@ -47,6 +47,22 @@ export class RadioService {
     );
   }
 
+  insertRoom(active: boolean, idRoom: number): Observable<any> {
+    return this.http.post<any>(`https://radiobobbaapi.alwaysdata.net/api/crudRooms.php`, { active, idRoom }).pipe(
+      catchError(() => {
+        return throwError(() => new Error('Error en la solicitud de la inserción de la sala'));
+      })
+    );
+  }
+
+  getInfoRoomHabbo(id: any): Observable<any> {
+    return this.http.get<any>(`https://www.habbo.es/api/public/rooms/${id}`).pipe(
+      catchError(() => {
+        return throwError(() => new Error('Error obteniendo la información de la sala de Habbo.'));
+      })
+    );
+  }
+
   getIp(): Observable<any> {
     return this.http.get<any>(`https://api.country.is/`).pipe(
       catchError(() => {
