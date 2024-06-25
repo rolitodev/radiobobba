@@ -1,10 +1,7 @@
 <?php
 
 // Lista de orígenes permitidos
-$allowed_origins = [
-    'http://localhost:4200',
-    'https://radiobobba.com'
-];
+$allowed_origins = ["http://localhost:4200", "https://radiobobba.com", "https://www.radiobobba.com"];
 
 // Obtener el origen de la solicitud
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
