@@ -55,6 +55,14 @@ export class RadioService {
     );
   }
 
+  insertUser(data: any): Observable<any> {
+    return this.http.post<any>(`https://radiobobbaapi.alwaysdata.net/api/insertUseraa.php`, { ...data }).pipe(
+      catchError(() => {
+        return throwError(() => new Error('Error en la solicitud de la inserción del usuario'));
+      })
+    );
+  }
+
   getInfoRoomHabbo(id: any): Observable<any> {
     return this.http.get<any>(`https://www.habbo.es/api/public/rooms/${id}`).pipe(
       catchError(() => {

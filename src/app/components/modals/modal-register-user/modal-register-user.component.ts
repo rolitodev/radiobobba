@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog'; import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RadioService } from '../../../services/radio.service';
 import { HotToastService } from '@ngxpert/hot-toast';
-
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
@@ -17,54 +17,49 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 export class ModalRegisterUserComponent implements OnInit {
 
-  public formRegisterUser!: FormGroup;
-
   public isLoading: boolean = false;
 
+  public formRegisterUser!: FormGroup;
+
+  public ranks: any = [
+    { value: 0, name: 'Usuario' },
+    { value: 1, name: 'DJ' }
+  ];
+
   constructor(
-    public _fb: FormBuilder, public _radio: RadioService, public toast: HotToastService,
-    public dialogRef: MatDialogRef<ModalRegisterUserComponent>) { }
+    public _radio: RadioService, public _fb: FormBuilder, public _toast: HotToastService,
+    public dialogRef: MatDialogRef<ModalRegisterUserComponent>
+  ) { }
 
   ngOnInit(): void {
 
     this.formRegisterUser = this._fb.group({
-      idRoom: [null, [Validators.required]],
-      active: [false]
+      name: [null, Validators.required],
+      password: [null, Validators.required],
+      rank: [null, Validators.required],
+      active: [true],
+      description: [null]
     });
 
   }
 
   onSubmit(): void {
 
-    if (this.formRegisterUser.getRawValue().idRoom) {
+    this.isLoading = true;
 
-      this.isLoading = true;
-
-      this._radio.getInfoRoomHabbo(this.formRegisterUser.getRawValue().idRoom).subscribe({
-        next: async (data) => {
-
-          if (data.id) {
-            this.toast.success(`La sala ${data.name} de ${data.ownerName} se cargó correctamente. 🚀`);
-            this._radio.insertRoom(this.formRegisterUser.getRawValue().active, Number(this.formRegisterUser.getRawValue().idRoom)).subscribe({
-              next: async () => {
-                this.toast.success(`La sala ${data.name} de ${data.ownerName} se ha registrado correctamente. 🚀`);
-                this.isLoading = false;
-                this.closeDialog();
-              }, error: (error) => {
-                this.toast.error(error + ' 😢' || "Ha ocurrido un error. 😢");
-                this.isLoading = false;
-              }
-            });
-          }
-
-        },
-        error: (error) => {
-          this.toast.error(error + ' 😢' || "Ha ocurrido un error. 😢");
-          this.isLoading = false;
-        }
-      });
-
-    }
+    this._radio.insertUser(this.formRegisterUser.value).subscribe({
+      next: async (response: any) => {
+        this._toast.success('Usuario registrado correctamente 🎉');
+        this.isLoading = false;
+        this.formRegisterUser.reset();
+        this.isLoading = false;
+        this.closeDialog();
+      }, error: (err: any) => {
+        this._toast.error('Ha ocurrido un error 😢. Intentalo nuevamente.');
+        this.isLoading = false;
+        throw err;
+      },
+    });
 
   }
 

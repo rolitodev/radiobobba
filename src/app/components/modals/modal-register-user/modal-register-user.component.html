@@ -5,21 +5,32 @@
             <div class="w-full">
                 <div class="flex flex-col items-center">
                     <h1 class="text-2xl xl:text-3xl font-extrabold text-white">
-                        Registrar Nueva Sala
+                        Registrar un Nuevo Usuario
                     </h1>
                     <div class="w-full flex-1 mt-8">
 
                         <div class="mx-auto max-w-xs">
+
                             <input
+                                class="w-full mb-3 px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                type="text" placeholder="Nombre habbo" formControlName="name" />
+
+                            <input
+                                class="w-full mb-3 px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                type="text" placeholder="Contraseña" formControlName="password" />
+
+                            <select
+                                class="py-3 mb-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                formControlName="rank">
+                                <option selected disabled value="null">Selecciona el rango del usuario</option>
+                                <option *ngFor="let rank of ranks" [value]="rank.value">{{rank.name}}</option>
+                            </select>
+
+                            <textarea
                                 class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                type="text" placeholder="Id de la sala de Habbo" formControlName="idRoom" mask="9999999999" />
-                            <label class="inline-flex items-center me-5 cursor-pointer mt-4"
-                                matTooltip="Al activar el botón, se mostrará la sala en la lista de la página.">
-                                <input type="checkbox" class="sr-only peer" formControlName="active">
-                                <div
-                                    class="relative w-11 h-6 rounded-full peer bg-gray-700 peer-focus:ring-4peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                </div>
-                            </label>
+                                placeholder="Descripción Usuario" formControlName="description"
+                                [maxlength]="200">
+                            </textarea>
 
                             <button type="submit" [disabled]="formRegisterUser.invalid || isLoading"
                                 class="mt-5 tracking-wide font-semibold bg-red-500 text-gray-100 w-full py-4 rounded-lg hover:bg-red-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">

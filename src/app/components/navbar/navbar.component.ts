@@ -49,14 +49,13 @@ export class NavbarComponent {
     this._title.setTitle('Radio Bobba: Iniciar Sesión Panel DJ');
 
     if (item.toString().toLocaleLowerCase() === 'panel dj') {
-
       if (localStorage.getItem('user')) {
         this.router.navigate(['/dj']);
         return;
       }
-
-      this.dialog.open(ModalLoginComponent);
-
+      this.dialog.open(ModalLoginComponent).afterClosed().subscribe(() => {
+        this._title.setTitle('Radio Bobba: Música en Vivo y Diversión en Habbo Hotel');
+      });
     }
 
   }

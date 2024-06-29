@@ -5,6 +5,7 @@ import { AuthService } from '../../../services/auth.service';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { Router } from '@angular/router';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-modal-login',
@@ -22,7 +23,7 @@ export class ModalLoginComponent implements OnInit {
 
   constructor(
     public _fb: FormBuilder, private _auth: AuthService, public toast: HotToastService, public _route: Router,
-    public dialogRef: MatDialogRef<ModalLoginComponent>
+    public dialogRef: MatDialogRef<ModalLoginComponent>, private _title: Title
   ) { }
 
   ngOnInit(): void {
@@ -61,18 +62,8 @@ export class ModalLoginComponent implements OnInit {
 
   }
 
-  // register(): void {
-  //   this._auth.register({ name: 'Harry.Plones', password: 'Blurryface27', rank: 1, email: 'Harry.Plones', description: 'Solo es un Ingeniero de Sonido roleando como comunicador y dizque "DJ", Lisztomaníaco (adícto a escuchar música), y hablar de ella, chismoso de profesión, siempre morboso nunca inmorboso, y alcohólico de closet.' }).subscribe(
-  //     (data: any) => {
-  //       console.log('data', data);
-  //     },
-  //     (error: any) => {
-  //       console.log('error', error);
-  //     }
-  //   );
-  // }
-
   closeDialog(): void {
+    this._title.setTitle('Radio Bobba: Música en Vivo y Diversión en Habbo Hotel');
     this.dialogRef.close();
   }
 
